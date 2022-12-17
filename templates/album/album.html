@@ -1,0 +1,108 @@
+ {% load static %}
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static "bootstrap/css/bootstrap.min.css" %} " >
+    <title>
+        {% block title %} photogram {% endblock %}
+    </title>
+</head>
+<body> 
+    <header>
+        <div class="collapse bg-dark" id="navbarHeader">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8 col-md-7 py-4">
+                        <h4 class="text-white">About</h4>
+                        <p class="text-muted">Add some information about the album below, the author, or any other
+                            background
+                            context. Make it a few sentences long so folks can pick up some informative tidbits. Then,
+                            link them off
+                            to some social networking sites or contact information.</p>
+                    </div>
+                    <div class="col-sm-4 offset-md-1 py-4">
+                        <h4 class="text-white">Contact</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-white">Follow on Twitter</a></li>
+                            <li><a href="#" class="text-white">Like on Facebook</a></li>
+                            <?if(Session::isAuthenticated()){?>
+                            <li><a href="/?logout" class="text-white">Logout</a></li>
+                            <?} else {?>
+                                <li><a href="/login.php" class="text-white">Login</a></li>
+                            <?}?>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navbar navbar-dark bg-dark shadow-sm">
+            <div class="container">
+                <a href="#" class="navbar-brand d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2"
+                        viewBox="0 0 24 24">
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                        <circle cx="12" cy="13" r="4" />
+                    </svg>
+                    <strong>Photogram</strong>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
+                    aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <form method="post" action="/" enctype="multipart/form-data">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <h1 id="greeting" class="fw-light">What are you upto,
+                    </h1>
+                    <p class="lead text-muted">Share a photo that talks about it.</p>
+                    <textarea id="post_text" name="post_text" class="form-control" placeholder="What are you upto?"
+                        rows="3"></textarea>
+                    <div class="input-group mb-3">
+                        <input type="file" accept="image/*" class="form-control" name="post_image" id="inputGroupFile02">
+                        <!-- <label class="input-group-text" for="inputGroupFile02">Upload</label> -->
+                    </div>
+                    <p>
+                        <button class="btn btn-success my-2" type="submit">Share memory</button>
+                        <!-- <a href="#" class="btn btn-secondary my-2">Clear</a> -->
+                    </p>
+                </div>
+            </form>
+        </div>
+    </section>
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <h3 id="total-posts"></h3>
+            <div class="row" id="masonry-area">
+                <div class="col-lg-3 mb-4">
+                    <div class="card">
+                        <img class="bd-placeholder-img card-img-top" src="<?= $p->getImageUri() ?>">
+                        <div class="card-body">
+                                <p class="card-text">
+                                </p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-primary">Like</button>
+                                        <button type="button" class="btn btn-sm btn-outline-success">Share</button>
+                                       
+                                            <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
+                                       
+                                    </div>
+                                    <small class="text-muted"></small>
+                                </div>
+                        </div>
+                    </div>
+                </div>               
+            </div>
+        </div>
+    </div>
+    {% include 'script.html' %}
+    </body>
+</html>

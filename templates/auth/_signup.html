@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    {% include 'head.html' %}
+<body>
+<main class=" form-signup w-100 m-auto" style="display: block;max-width: 330px;padding: 15px; margin:auto;">
+    <form action="newsignup/" method="post" style="box-sizing: border-box;">
+        {% csrf_token %}
+        <img class="mb-4" src="{% static "bootstrap/icons/bootstrap-logo.svg" %}" alt="" width="72" height="57">
+        <h1 class="h3 mb-3 fw-normal">signup here</h1>
+
+        <div class="form-floating">
+            <input name="username" type="text" required class="form-control" id="floatingInputUsername"
+                placeholder="name@example.com">
+            <label for="floatingInputUsername">Username</label>
+        </div>
+        <div class="form-floating">
+            <input name="phone" type="text" required class="form-control" id="floatingInputPhone" placeholder="Phone">
+            <label for="floatingInput">phone</label>
+        </div>
+        <div class="form-floating">
+            <input name="email" type="email" required class="form-control" id="floatingInput" placeholder="Email">
+            <label for="floatingInput">Email address</label>
+        </div>
+        <div class="form-floating">
+            <input name="password" type="password" required class="form-control" id="floatingPassword"
+                placeholder="Password">
+            <label for="floatingPassword">Password</label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Sign up</button>
+    </form>
+    </main>
+    </body>
+
+</html>
