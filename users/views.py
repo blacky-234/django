@@ -3,6 +3,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from . models import User
 
+# testung
+from django.views.generic import TemplateView
+
 # Create your views here.
 
 
@@ -11,10 +14,8 @@ def login(request):
 
 
 def signup(request):
-    return render(request, 'auth/_signup.html')
-
-
-def newsignup(request):
+    if(request.method == "GET"):
+        return render(request, 'auth/_signup.html');
     if request.method == "POST":
         name = request.POST['username']
         phone = request.POST['phone']
@@ -22,9 +23,24 @@ def newsignup(request):
         password = request.POST['password']
         user = User.objects.create_user(username=name, email=email, password=password, phone=phone)
         user.save()
-        return login(request)
+        return redirect('login')
     else:
         return redirect('signup')
+
+        
+
+
+# def newsignup(request):
+#     if request.method == "POST":
+#         name = request.POST['username']
+#         phone = request.POST['phone']
+#         email = request.POST['email']
+#         password = request.POST['password']
+#         user = User.objects.create_user(username=name, email=email, password=password, phone=phone)
+#         user.save()
+#         return login(request)
+#     else:
+#         return redirect('signup')
 
 
 def alogin(request):
